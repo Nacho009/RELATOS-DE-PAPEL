@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaShoppingCart, FaUserCircle } from 'react-icons/fa';
 import logo from '../assets/LOGO-1.JPG';
 import CartSidebar from './CartSidebar'; 
-import { CartContext } from '../hooks/useCart';
+import { CartContext } from '../context/CartContext';
 
 const Navbar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);

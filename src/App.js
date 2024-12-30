@@ -7,7 +7,7 @@ import UserPage from './pages/UserPage';
 import CheckoutPage from './pages/CheckoutPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { CartProvider } from './hooks/useCart';
+import { CartProvider } from './context/CartContext';
 import './styles/HomePage.css';
 import books from './data/books';
 import NotificationBanner from './components/NotificationBanner';
@@ -15,7 +15,6 @@ import NotificationBanner from './components/NotificationBanner';
 
 function App() {
 
-  const cartItems = [];
   const [isBannerVisible, setIsBannerVisible] = useState(true);
 
   const handleBannerClose = () => {
@@ -36,7 +35,7 @@ function App() {
           <main className="flex-grow">
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/home" element={<HomePage cartItems={cartItems}/>} />
+              <Route path="/home" element={<HomePage/>} />
               <Route path="/book/:id" element={<BookPage books={books} />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/profile" element={<UserPage />} />

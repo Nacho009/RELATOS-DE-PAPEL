@@ -1,38 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React, {useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import books from '../data/books';
 import SearchBar from '../components/SearchBar';
 import Filters from '../components/Filters';
 import BookList from '../components/BookList';
-import { CartContext } from '../hooks/useCart';
+import { CartContext } from '../context/CartContext';
+import useFilters from '../hooks/useFilters';
 
 const HomePage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [authorFilter, setAuthorFilter] = useState('');
-  const [genreFilter, setGenreFilter] = useState('');
-  const [filteredBooks, setFilteredBooks] = useState(books || []);
+  const { 
+    searchTerm, setSearchTerm,
+    authorFilter, setAuthorFilter,
+    genreFilter, setGenreFilter,
+    filteredBooks, filterBooks 
+  } = useFilters(books);
+
   const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
-
-  const handleSearch = () => {
-    let filtered = books;
-
-    if (searchTerm) {
-      filtered = filtered.filter((book) =>
-        book.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    if (authorFilter) {
-      filtered = filtered.filter((book) => book.author === authorFilter);
-    }
-
-    if (genreFilter) {
-      filtered = filtered.filter((book) => book.genre === genreFilter);
-    }
-
-    setFilteredBooks(filtered);
-  };
 
   const handleBookClick = (id) => {
     navigate(`/book/${id}`);
@@ -43,7 +27,7 @@ const HomePage = () => {
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        handleSearch={handleSearch}
+        handleSearch={filterBooks}
       />
       <Filters
         books={books}

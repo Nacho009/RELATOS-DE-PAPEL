@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar, FaRegStar, FaUserCircle } from 'react-icons/fa';
 import reviews from '../data/usersReviews';
-import { CartContext } from '../hooks/useCart';
+import { CartContext } from '../context/CartContext';
 
 const BookPage = ({ books }) => {
   const { id } = useParams();
